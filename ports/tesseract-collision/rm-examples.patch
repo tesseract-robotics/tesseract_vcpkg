@@ -1,0 +1,13 @@
+diff --git a/tesseract_collision/CMakeLists.txt b/tesseract_collision/CMakeLists.txt
+index a7ba308..c0503ea 100644
+--- a/tesseract_collision/CMakeLists.txt
++++ b/tesseract_collision/CMakeLists.txt
+@@ -115,7 +115,7 @@ endif()
+ 
+ # Examples
+ if(TESSERACT_BUILD_FCL)
+-  add_subdirectory(examples)
++  #add_subdirectory(examples)
+ endif()
+ 
+ configure_package(NAMESPACE tesseract)

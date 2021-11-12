@@ -1,0 +1,14 @@
+{
+  "name": "tesseract-geometry",
+  "version-string": "0.6.4",
+  "description": "Defines geometry types used across tesseract packages",
+  "dependencies": [
+    "assimp",
+    "console-bridge",
+    "eigen3",
+    "octomap",
+    "ros-industrial-cmake-boilerplate",
+    "tesseract-common",
+    "vcpkg-cmake-config"
+  ]
+}

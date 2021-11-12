@@ -1,0 +1,10 @@
+{
+  "name": "tesseract-support",
+  "version-string": "0.6.4",
+  "description": "Support data for tesseract unit tests and examples",
+  "dependencies": [
+    "ros-industrial-cmake-boilerplate",
+    "tesseract-common",
+    "vcpkg-cmake-config"
+  ]
+}

@@ -1,0 +1,13 @@
+diff --git a/tesseract_collision/bullet/src/tesseract_compound_compound_collision_algorithm.cpp b/tesseract_collision/bullet/src/tesseract_compound_compound_collision_algorithm.cpp
+index 4c585b2..d0ea57a 100644
+--- a/tesseract_collision/bullet/src/tesseract_compound_compound_collision_algorithm.cpp
++++ b/tesseract_collision/bullet/src/tesseract_compound_compound_collision_algorithm.cpp
+@@ -133,7 +133,7 @@ struct TesseractCompoundCompoundLeafCallback : btDbvt::ICollide
+     , m_sharedManifold(sharedManifold)
+     , m_contact_test_data(static_cast<ContactTestData*>(compound1ObjWrap->m_collisionObject->getUserPointer()))
+   {
+-    btAssert(dynamic_cast<ContactTestData*>(compound1ObjWrap->m_collisionObject->getUserPointer()) != nullptr);
++//    btAssert(dynamic_cast<ContactTestData*>(compound1ObjWrap->m_collisionObject->getUserPointer()) != nullptr);
+   }
+ 
+   void Process(const btDbvtNode* leaf0, const btDbvtNode* leaf1)  // NOLINT

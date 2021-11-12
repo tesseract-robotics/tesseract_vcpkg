@@ -1,0 +1,17 @@
+{
+  "name": "tesseract-urdf",
+  "version-string": "0.6.4",
+  "description": "Convert between URDF file format and tesseract data structures",
+  "dependencies": [
+    "boost-core",
+    "console-bridge",
+    "eigen3",
+    "pcl",
+    "ros-industrial-cmake-boilerplate",
+    "tesseract-collision",
+    "tesseract-common",
+    "tesseract-geometry",
+    "tesseract-scene-graph",
+    "vcpkg-cmake-config"
+  ]
+}

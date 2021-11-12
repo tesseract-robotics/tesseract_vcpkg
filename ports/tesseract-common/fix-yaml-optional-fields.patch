@@ -1,0 +1,26 @@
+diff --git a/tesseract_common/include/tesseract_common/yaml_utils.h b/tesseract_common/include/tesseract_common/yaml_utils.h
+index 9fd7483..6a4917b 100644
+--- a/tesseract_common/include/tesseract_common/yaml_utils.h
++++ b/tesseract_common/include/tesseract_common/yaml_utils.h
+@@ -60,7 +60,7 @@ struct convert<tesseract_common::PluginInfo>
+ 
+     rhs.class_name = node["class"].as<std::string>();
+ 
+-    if (node["config"] != nullptr)
++    if (node["config"])
+       rhs.config = node["config"];
+ 
+     return true;
+@@ -83,10 +83,10 @@ struct convert<tesseract_common::PluginInfoContainer>
+ 
+   static bool decode(const Node& node, tesseract_common::PluginInfoContainer& rhs)
+   {
+-    if (node["default"] != nullptr)
++    if (node["default"])
+       rhs.default_plugin = node["default"].as<std::string>();
+ 
+-    if (node["plugins"] == nullptr)
++    if (!node["plugins"])
+       throw std::runtime_error("PluginInfoContainer, missing 'plugins' entry!");
+ 
+     const Node& plugins = node["plugins"];

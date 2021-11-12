@@ -1,0 +1,82 @@
+diff --git a/tesseract_collision/bullet/CMakeLists.txt b/tesseract_collision/bullet/CMakeLists.txt
+index 1649b2d..22f326a 100644
+--- a/tesseract_collision/bullet/CMakeLists.txt
++++ b/tesseract_collision/bullet/CMakeLists.txt
+@@ -12,8 +12,8 @@ if(NOT
+     WARNING "Bullet does not appear to be build with double precision, current definitions: ${BULLET_DEFINITIONS}")
+ endif()
+ 
+-include_directories(BEFORE "${BULLET_ROOT_DIR}/${BULLET_INCLUDE_DIRS}")
+-link_directories(BEFORE "${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS}")
++#include_directories(BEFORE "${BULLET_ROOT_DIR}/${BULLET_INCLUDE_DIRS}")
++#link_directories(BEFORE "${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS}")
+ 
+ find_library(CONVEX_DECOMPOSITION_LIBRARY ConvexDecomposition HINTS ${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS})
+ find_library(HACD_LIBRARY HACD HINTS ${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS})
+@@ -53,7 +53,7 @@ target_code_coverage(
+   ENABLE ${TESSERACT_ENABLE_CODE_COVERAGE})
+ target_include_directories(${PROJECT_NAME}_bullet PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                          "$<INSTALL_INTERFACE:include>")
+-target_include_directories(${PROJECT_NAME}_bullet SYSTEM PUBLIC "${BULLET_ROOT_DIR}/${BULLET_INCLUDE_DIRS}")
++target_include_directories(${PROJECT_NAME}_bullet SYSTEM PUBLIC "${BULLET_INCLUDE_DIRS}")
+ 
+ # Create target for Bullet implementation
+ add_library(${PROJECT_NAME}_bullet_factories src/bullet_factories.cpp)
+@@ -72,7 +72,7 @@ target_code_coverage(
+ target_include_directories(
+   ${PROJECT_NAME}_bullet_factories PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                           "$<INSTALL_INTERFACE:include>")
+-target_include_directories(${PROJECT_NAME}_bullet_factories SYSTEM PUBLIC "${BULLET_ROOT_DIR}/${BULLET_INCLUDE_DIRS}")
++target_include_directories(${PROJECT_NAME}_bullet_factories SYSTEM PUBLIC "${BULLET_INCLUDE_DIRS}")
+ 
+ # Convex decomposition libraries
+ add_library(${PROJECT_NAME}_hacd_convex_decomposition src/convex_decomposition_hacd.cpp)
+@@ -99,7 +99,7 @@ target_include_directories(
+   ${PROJECT_NAME}_hacd_convex_decomposition PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                    "$<INSTALL_INTERFACE:include>")
+ target_include_directories(${PROJECT_NAME}_hacd_convex_decomposition SYSTEM
+-                           PUBLIC "${BULLET_ROOT_DIR}/${BULLET_INCLUDE_DIRS}")
++                           PUBLIC "${BULLET_INCLUDE_DIRS}")
+ 
+ if(NOT MSVC)
+   # Create target for creating convex hulls from meshes
+diff --git a/tesseract_collision/fcl/CMakeLists.txt b/tesseract_collision/fcl/CMakeLists.txt
+index 5bff0af..f2294d7 100644
+--- a/tesseract_collision/fcl/CMakeLists.txt
++++ b/tesseract_collision/fcl/CMakeLists.txt
+@@ -1,7 +1,7 @@
+ find_package(fcl 0.6 REQUIRED)
+ 
+-include_directories(BEFORE ${FCL_INCLUDE_DIRS})
+-link_directories(BEFORE ${FCL_LIBRARY_DIRS})
++#include_directories(BEFORE ${FCL_INCLUDE_DIRS})
++#link_directories(BEFORE ${FCL_LIBRARY_DIRS})
+ 
+ # Create target for FCL implementation
+ add_library(${PROJECT_NAME}_fcl src/fcl_discrete_managers.cpp src/fcl_utils.cpp src/fcl_collision_object_wrapper.cpp)
+diff --git a/tesseract_collision/test/benchmarks/CMakeLists.txt b/tesseract_collision/test/benchmarks/CMakeLists.txt
+index e501649..d0a2ffb 100644
+--- a/tesseract_collision/test/benchmarks/CMakeLists.txt
++++ b/tesseract_collision/test/benchmarks/CMakeLists.txt
+@@ -24,7 +24,7 @@ macro(add_benchmark benchmark_name benchmark_file)
+     octomath
+     ${LIBFCL_LIBRARIES})
+   target_include_directories(${benchmark_name} PRIVATE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
+-  target_include_directories(${benchmark_name} SYSTEM PRIVATE "${BULLET_ROOT_DIR}/${BULLET_INCLUDE_DIRS}")
++  target_include_directories(${benchmark_name} SYSTEM PRIVATE "${BULLET_INCLUDE_DIRS}")
+   add_dependencies(
+     ${benchmark_name}
+     ${PROJECT_NAME}_test_suite_benchmarks
+diff --git a/tesseract_collision/vhacd/CMakeLists.txt b/tesseract_collision/vhacd/CMakeLists.txt
+index 1b92309..1bd904a 100644
+--- a/tesseract_collision/vhacd/CMakeLists.txt
++++ b/tesseract_collision/vhacd/CMakeLists.txt
+@@ -62,7 +62,7 @@ target_link_libraries(
+          ${BULLET_LIBRARIES})
+ target_include_directories(${PROJECT_NAME}_vhacd PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                         "$<INSTALL_INTERFACE:include>")
+-target_include_directories(${PROJECT_NAME}_vhacd SYSTEM PUBLIC "${BULLET_ROOT_DIR}/${BULLET_INCLUDE_DIRS}")
++target_include_directories(${PROJECT_NAME}_vhacd SYSTEM PUBLIC "${BULLET_INCLUDE_DIRS}")
+ 
+ # Convex decomposition libraries
+ add_library(${PROJECT_NAME}_vhacd_convex_decomposition src/convex_decomposition_vhacd.cpp)

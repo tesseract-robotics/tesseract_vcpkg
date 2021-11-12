@@ -1,0 +1,110 @@
+diff --git a/tesseract_geometry/CMakeLists.txt b/tesseract_geometry/CMakeLists.txt
+index 647a005..90183b6 100644
+--- a/tesseract_geometry/CMakeLists.txt
++++ b/tesseract_geometry/CMakeLists.txt
+@@ -16,7 +16,7 @@ find_package(console_bridge REQUIRED)
+ find_package(tesseract_common REQUIRED)
+ find_package(octomap REQUIRED)
+ find_package(assimp REQUIRED)
+-link_directories(${assimp_LIBRARY_DIRS})
++#link_directories(${assimp_LIBRARY_DIRS})
+ 
+ if(NOT TARGET console_bridge::console_bridge)
+   add_library(console_bridge::console_bridge INTERFACE IMPORTED)
+@@ -70,7 +70,8 @@ target_link_libraries(
+             console_bridge::console_bridge
+             octomap
+             octomath
+-            ${assimp_LIBRARIES})
++            assimp::assimp)
++#            ${assimp_LIBRARIES})
+ target_compile_options(${PROJECT_NAME} INTERFACE ${TESSERACT_COMPILE_OPTIONS_PUBLIC})
+ target_compile_definitions(${PROJECT_NAME} INTERFACE ${TESSERACT_COMPILE_DEFINITIONS}
+                                                      ${TESSERACT_ASSIMP_USE_PBRMATERIAL})
+@@ -96,7 +97,7 @@ install(
+   PATTERN "*.h"
+   PATTERN ".svn" EXCLUDE)
+ 
+-install(FILES "${CMAKE_CURRENT_LIST_DIR}/cmake/Findassimp.cmake" DESTINATION lib/cmake/${PROJECT_NAME})
++#install(FILES "${CMAKE_CURRENT_LIST_DIR}/cmake/Findassimp.cmake" DESTINATION lib/cmake/${PROJECT_NAME})
+ 
+ # ADD Examples
+ add_subdirectory(examples)
+diff --git a/tesseract_geometry/cmake/Findassimp.cmake b/tesseract_geometry/cmake/Findassimp.cmake
+deleted file mode 100644
+index c4ac9e3..0000000
+--- a/tesseract_geometry/cmake/Findassimp.cmake
++++ /dev/null
+@@ -1,72 +0,0 @@
+-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+-  set(ASSIMP_ARCHITECTURE "64")
+-elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+-  set(ASSIMP_ARCHITECTURE "32")
+-endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
+-
+-if(MSVC)
+-  find_package(PkgConfig REQUIRED)
+-  # assimp is required, so REQUIRE the second attempt
+-  pkg_check_modules(PC_ASSIMP REQUIRED assimp)
+-
+-  if(MSVC_TOOLSET_VERSION)
+-    set(ASSIMP_MSVC_VERSION "vc${MSVC_TOOLSET_VERSION}")
+-  else(MSVC_TOOLSET_VERSION)
+-    if(MSVC12)
+-      set(ASSIMP_MSVC_VERSION "vc120")
+-    elseif(MSVC14)
+-      set(ASSIMP_MSVC_VERSION "vc140")
+-    endif(MSVC12)
+-  endif(MSVC_TOOLSET_VERSION)
+-
+-  # Find path of each library
+-  find_path(assimp_INCLUDE_DIR NAMES assimp/anim.h HINTS ${PC_ASSIMP_INCLUDEDIR} REQUIRED)
+-  find_path(
+-    assimp_LIBRARY_DIR
+-    NAMES assimp-${ASSIMP_MSVC_VERSION}-mt.lib
+-          assimp-vc140-mt.lib
+-          assimp-vc141-mt.lib
+-          assimp-vc120-mt.lib
+-    HINTS ${PC_ASSIMP_LIBDIR} "${PC_ASSIMP_PREFIX}/Lib" REQUIRED)
+-  find_library(
+-    assimp_LIBRARY
+-    NAMES assimp-${ASSIMP_MSVC_VERSION}-mt.lib
+-          assimp-vc140-mt.lib
+-          assimp-vc141-mt.lib
+-          assimp-vc120-mt.lib
+-    PATHS ${assimp_LIBRARY_DIR} REQUIRED)
+-else(MSVC)
+-
+-  find_path(
+-    assimp_INCLUDE_DIR
+-    NAMES assimp/postprocess.h
+-          assimp/scene.h
+-          assimp/version.h
+-          assimp/config.h
+-          assimp/cimport.h
+-    PATHS /usr/local/include
+-    PATHS /usr/include/ REQUIRED)
+-
+-  find_library(
+-    assimp_LIBRARY
+-    NAMES assimp
+-    PATHS /usr/local/lib/
+-    PATHS /usr/lib64/
+-    PATHS /usr/lib/ REQUIRED)
+-endif(MSVC)
+-
+-mark_as_advanced(assimp_INCLUDE_DIR assimp_LIBRARY assimp_LIBRARY_DIR)
+-
+-# Output variables generation
+-include(FindPackageHandleStandardArgs)
+-if(MSVC)
+-  find_package_handle_standard_args(assimp REQUIRED_VARS assimp_INCLUDE_DIR assimp_LIBRARY assimp_LIBRARY_DIR)
+-else(MSVC)
+-  find_package_handle_standard_args(assimp REQUIRED_VARS assimp_INCLUDE_DIR assimp_LIBRARY)
+-endif(MSVC)
+-
+-if(assimp_FOUND)
+-  set(assimp_INCLUDE_DIRS ${assimp_INCLUDE_DIR})
+-  set(assimp_LIBRARIES ${assimp_LIBRARY})
+-  set(assimp_LIBRARY_DIRS ${assimp_LIBRARY_DIR})
+-endif()

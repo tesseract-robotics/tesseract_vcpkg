@@ -1,0 +1,15 @@
+{
+  "name": "tesseract-scene-graph",
+  "version-string": "0.6.4",
+  "description": "Tesseract data structure to manage connectivity of objects in the environment",
+  "dependencies": [
+    "boost-graph",
+    "console-bridge",
+    "eigen3",
+    "orocos-kdl",
+    "ros-industrial-cmake-boilerplate",
+    "tesseract-common",
+    "tesseract-geometry",
+    "vcpkg-cmake-config"
+  ]
+}

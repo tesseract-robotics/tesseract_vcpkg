@@ -1,0 +1,24 @@
+diff --git a/tesseract_collision/bullet/CMakeLists.txt b/tesseract_collision/bullet/CMakeLists.txt
+index 6058523..eac8080 100644
+--- a/tesseract_collision/bullet/CMakeLists.txt
++++ b/tesseract_collision/bullet/CMakeLists.txt
+@@ -16,7 +16,7 @@ endif()
+ #link_directories(BEFORE "${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS}")
+ 
+ find_library(CONVEX_DECOMPOSITION_LIBRARY ConvexDecomposition HINTS ${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS})
+-find_library(HACD_LIBRARY HACD HINTS ${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS})
++#find_library(HACD_LIBRARY HACD HINTS ${BULLET_ROOT_DIR}/${BULLET_LIBRARY_DIRS})
+ 
+ # Create target for Bullet implementation
+ add_library(
+@@ -83,7 +83,9 @@ target_link_libraries(
+          tesseract::tesseract_geometry
+          console_bridge::console_bridge
+          ${BULLET_LIBRARIES}
+-         ${HACD_LIBRARY})
++#         ${HACD_LIBRARY}
++         HACD
++)
+ target_compile_options(${PROJECT_NAME}_hacd_convex_decomposition PRIVATE ${TESSERACT_COMPILE_OPTIONS_PRIVATE})
+ target_compile_options(${PROJECT_NAME}_hacd_convex_decomposition PUBLIC ${TESSERACT_COMPILE_OPTIONS_PUBLIC})
+ target_compile_definitions(${PROJECT_NAME}_hacd_convex_decomposition PUBLIC ${TESSERACT_COMPILE_DEFINITIONS}

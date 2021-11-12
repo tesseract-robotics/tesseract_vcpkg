@@ -1,0 +1,8 @@
+{
+  "name": "ros-industrial-cmake-boilerplate",
+  "version-string": "0.2.12",
+  "description": "A collection of boilerplate CMake scripts and macros",
+  "dependencies": [
+    "vcpkg-cmake-config"
+  ]
+}

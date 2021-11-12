@@ -1,0 +1,13 @@
+diff --git a/tesseract_common/include/tesseract_common/class_loader.hpp b/tesseract_common/include/tesseract_common/class_loader.hpp
+index d5948c2..bb99e06 100644
+--- a/tesseract_common/include/tesseract_common/class_loader.hpp
++++ b/tesseract_common/include/tesseract_common/class_loader.hpp
+@@ -70,7 +70,7 @@ std::shared_ptr<ClassBase> ClassLoader::createSharedInstance(const std::string&
+     throw std::runtime_error("Failed to find symbol '" + symbol_name +
+                              "' in library: " + decorate(library_name, library_directory));
+ 
+-  boost::shared_ptr<ClassBase> plugin = boost::dll::import<ClassBase>(lib, symbol_name);
++  boost::shared_ptr<ClassBase> plugin = boost::dll::import_symbol<ClassBase>(lib, symbol_name);
+   return std::shared_ptr<ClassBase>(plugin.get(), [plugin](ClassBase*) mutable { plugin.reset(); });
+ }
+ 

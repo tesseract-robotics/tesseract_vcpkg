@@ -1,0 +1,16 @@
+{
+  "name": "tesseract-common",
+  "version-string": "0.6.4",
+  "description": "Common functionality across tesseract packages",
+  "dependencies": [
+    "boost-filesystem",
+    "boost-serialization",
+    "boost-system",
+    "console-bridge",
+    "eigen3",
+    "ros-industrial-cmake-boilerplate",
+    "tinyxml2",
+    "vcpkg-cmake-config",
+    "yaml-cpp"
+  ]
+}
